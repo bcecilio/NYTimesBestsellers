@@ -92,3 +92,4 @@ iOSInjectionProject/
 # ignoring Secrets
 Secrets/
 .DS_Store
+project.pbxproj
