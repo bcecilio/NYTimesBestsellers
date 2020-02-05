@@ -89,6 +89,6 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-//ignoring Secrets
+# ignoring Secrets
 Secrets/
 .DS_Store
