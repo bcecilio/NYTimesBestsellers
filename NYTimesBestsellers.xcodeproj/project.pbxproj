@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B7A716823EB68CB00F6734D /* NYTKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A716723EB68CB00F6734D /* NYTKey.swift */; };
 		B762E64123EB5640002AE005 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64023EB5640002AE005 /* AppDelegate.swift */; };
 		B762E64323EB5640002AE005 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64223EB5640002AE005 /* SceneDelegate.swift */; };
 		B762E64523EB5640002AE005 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64423EB5640002AE005 /* ViewController.swift */; };
@@ -40,7 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B7A716723EB68CB00F6734D /* NYTKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NYTKey.swift; path = ../../../../../../Downloads/NYTKey.swift; sourceTree = "<group>"; };
 		B762E63D23EB5640002AE005 /* NYTimesBestsellers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NYTimesBestsellers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B762E64023EB5640002AE005 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B762E64223EB5640002AE005 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,14 +82,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B7A716423EB669C00F6734D /* Secrets */ = {
-			isa = PBXGroup;
-			children = (
-				0B7A716723EB68CB00F6734D /* NYTKey.swift */,
-			);
-			path = Secrets;
-			sourceTree = "<group>";
-		};
 		B762E63423EB5640002AE005 = {
 			isa = PBXGroup;
 			children = (
@@ -113,7 +103,7 @@
 		B762E63F23EB5640002AE005 /* NYTimesBestsellers */ = {
 			isa = PBXGroup;
 			children = (
-				0B7A716423EB669C00F6734D /* Secrets */,
+				BE22B3B623EB705D0087A37D /* Secrets */,
 				B762E68223EB5960002AE005 /* Cells */,
 				B762E67B23EB5860002AE005 /* Services */,
 				B762E66E23EB5708002AE005 /* Views */,
@@ -191,6 +181,13 @@
 				B762E68023EB5920002AE005 /* FavoritesCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		BE22B3B623EB705D0087A37D /* Secrets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Secrets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,7 +307,6 @@
 				B762E68123EB5920002AE005 /* FavoritesCell.swift in Sources */,
 				B762E64323EB5640002AE005 /* SceneDelegate.swift in Sources */,
 				B762E67423EB5740002AE005 /* BookDetailView.swift in Sources */,
-				0B7A716823EB68CB00F6734D /* NYTKey.swift in Sources */,
 				B762E67623EB574C002AE005 /* SettingsView.swift in Sources */,
 				B762E67D23EB5880002AE005 /* GenericCoderAPI.swift in Sources */,
 				B762E66D23EB5704002AE005 /* NYTBook.swift in Sources */,
@@ -467,13 +463,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S55722VFBC;
 				INFOPLIST_FILE = NYTimesBestsellers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.brendoncecilio.NYTimesBestsellers;
+				PRODUCT_BUNDLE_IDENTIFIER = ovictor.NYTimesBestsellers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -485,13 +482,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S55722VFBC;
 				INFOPLIST_FILE = NYTimesBestsellers/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.brendoncecilio.NYTimesBestsellers;
+				PRODUCT_BUNDLE_IDENTIFIER = ovictor.NYTimesBestsellers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -504,9 +502,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 879MP5M96B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NYTimesBestsellersTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,9 +524,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 879MP5M96B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NYTimesBestsellersTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
