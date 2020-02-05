@@ -82,6 +82,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B7A716423EB669C00F6734D /* Secrets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Secrets;
+			sourceTree = "<group>";
+		};
 		B762E63423EB5640002AE005 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +110,7 @@
 		B762E63F23EB5640002AE005 /* NYTimesBestsellers */ = {
 			isa = PBXGroup;
 			children = (
+				0B7A716423EB669C00F6734D /* Secrets */,
 				B762E68223EB5960002AE005 /* Cells */,
 				B762E67B23EB5860002AE005 /* Services */,
 				B762E66E23EB5708002AE005 /* Views */,
@@ -455,7 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 879MP5M96B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NYTimesBestsellers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -473,7 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 879MP5M96B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NYTimesBestsellers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
