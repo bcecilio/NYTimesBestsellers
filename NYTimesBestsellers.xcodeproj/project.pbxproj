@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7517DAA23EDFA8B00F52394 /* NYTKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7517DA923EDFA8B00F52394 /* NYTKey.swift */; };
 		B762E64123EB5640002AE005 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64023EB5640002AE005 /* AppDelegate.swift */; };
 		B762E64323EB5640002AE005 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64223EB5640002AE005 /* SceneDelegate.swift */; };
 		B762E64523EB5640002AE005 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64423EB5640002AE005 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B7517DA923EDFA8B00F52394 /* NYTKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTKey.swift; sourceTree = "<group>"; };
 		B762E63D23EB5640002AE005 /* NYTimesBestsellers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NYTimesBestsellers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B762E64023EB5640002AE005 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B762E64223EB5640002AE005 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		BE22B3B623EB705D0087A37D /* Secrets */ = {
 			isa = PBXGroup;
 			children = (
+				B7517DA923EDFA8B00F52394 /* NYTKey.swift */,
 			);
 			path = Secrets;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				B762E68123EB5920002AE005 /* FavoritesCell.swift in Sources */,
 				B762E64323EB5640002AE005 /* SceneDelegate.swift in Sources */,
 				B762E67423EB5740002AE005 /* BookDetailView.swift in Sources */,
+				B7517DAA23EDFA8B00F52394 /* NYTKey.swift in Sources */,
 				B762E67623EB574C002AE005 /* SettingsView.swift in Sources */,
 				B762E67D23EB5880002AE005 /* GenericCoderAPI.swift in Sources */,
 				B762E66D23EB5704002AE005 /* NYTBook.swift in Sources */,
