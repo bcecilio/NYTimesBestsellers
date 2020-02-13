@@ -15,6 +15,7 @@ class SettingsController: UIViewController {
     
     let sections = ["section 1","section 2","section 3","section 4","section 5","section 6"]
     
+    
     override func loadView() {
         view = settingsView
     }
