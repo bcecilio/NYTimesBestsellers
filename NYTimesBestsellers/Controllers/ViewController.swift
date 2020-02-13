@@ -9,6 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private let initialView = NYTBestSellerView()
+    
+    override func loadView() {
+        view = initialView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -14,12 +14,13 @@ class NYTBestSellerView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collection.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
+        collection.backgroundColor = .systemGroupedBackground
         return collection
     }()
     
     private lazy var pickerView: UIPickerView = {
         let picker = UIPickerView()
+        picker.backgroundColor = .systemGroupedBackground
         return picker
     }()
 
