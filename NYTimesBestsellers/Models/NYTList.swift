@@ -88,7 +88,7 @@ struct List: Codable {
 }
 
 // MARK: - Book
-struct Book: Codable {
+struct Book: Codable, Equatable {
     let rank: Int
     let rankLastWeek: Int
     let weeksOnList: Int
@@ -147,7 +147,7 @@ struct Book: Codable {
 }
 
 // MARK: - BuyLink
-struct BuyLink: Codable {
+struct BuyLink: Codable, Equatable {
     let name: String
     let url: String
 
@@ -158,7 +158,7 @@ struct BuyLink: Codable {
 }
 
 // MARK: - Isbn
-struct Isbn: Codable {
+struct Isbn: Codable, Equatable {
     let isbn10: String
     let isbn13: String
 

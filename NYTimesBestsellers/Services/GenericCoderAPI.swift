@@ -21,7 +21,8 @@ class GenericCoderAPI {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        NetworkHelper.shared.performDataTask(with: urlRequest) { result in
+        
+        NetworkHelper.shared.performDataTask(with: urlRequest, maxCacheDays: 3) { result in
             switch result {
             case .failure(let error):
                 completionHandler(.failure(.networkClientError(error)))
