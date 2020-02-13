@@ -33,7 +33,7 @@ class NYTTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControllers = [viewController, favoritesController, settingsController]
+        viewControllers = [viewController, UINavigationController(rootViewController: favoritesController), settingsController]
     }
 
 }
