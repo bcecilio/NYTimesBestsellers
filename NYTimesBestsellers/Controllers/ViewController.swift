@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .white
         initialView.collectionView.delegate = self
         initialView.collectionView.dataSource = self
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
