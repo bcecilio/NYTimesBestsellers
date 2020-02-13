@@ -41,7 +41,7 @@ struct ListType: Codable {
     }
 }
 
-// MARK: - ListType
+// MARK: - List
 struct ListWrapper: Codable {
     let status: String
     let copyright: String

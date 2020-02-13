@@ -11,12 +11,11 @@ import DataPersistence
 
 class SettingsController: UIViewController {
     
-    private let listType: [ListType]
+    private var listType = [ListType]()
     private let dataPersistence: DataPersistence<Book>
     
-    init(_ dataPersistence: DataPersistence<Book>, listType: [ListType]) {
+    init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
-        self.listType = listType
         super.init(nibName: nil, bundle: nil)
     }
     
