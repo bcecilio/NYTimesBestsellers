@@ -10,25 +10,28 @@ import XCTest
 @testable import NYTimesBestsellers
 
 class NYTimesBestsellersTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testGetLists() {
+        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTKey.key)"
+        
+        var listTypes = [ListType]()
+        let exp = XCTestExpectation(description: "Created test for something")
+        
+        GenericCoderAPI.manager.getJSON(objectType: ListTypeWrapper.self, with: endpoint) { result in
+            switch result {
+            case .failure(let error):
+                XCTFail("Failed to get JSON from link: \(error)")
+            case .success(let wrapper):
+                listTypes = wrapper.results
+                XCTAssertEqual(listTypes.count, 59)
+                exp.fulfill()
+            }
         }
+        
+        wait(for: [exp], timeout: 2)
     }
-
+    
+    func testBestSellersByList() {
+        let _ = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=\(NYTKey.key)"
+    }
 }
