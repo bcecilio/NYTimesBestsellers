@@ -32,6 +32,21 @@ class NYTimesBestsellersTests: XCTestCase {
     }
     
     func testBestSellersByList() {
-        let _ = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=\(NYTKey.key)"
+        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=\(NYTKey.key)"
+        var books = [Book]()
+        let exp = XCTestExpectation(description: "Created test for something")
+        
+        GenericCoderAPI.manager.getJSON(objectType: ListWrapper.self, with: endpoint) { result in
+            switch result {
+            case .failure(let error):
+                XCTFail("Failed to get JSON from link: \(error)")
+            case .success(let wrapper):
+                books = wrapper.list.books
+                XCTAssertEqual(books.count, wrapper.numResults)
+                exp.fulfill()
+            }
+        }
+        
+        wait(for: [exp], timeout: 2)
     }
 }
