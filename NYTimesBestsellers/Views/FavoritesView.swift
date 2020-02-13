@@ -10,11 +10,12 @@ import UIKit
 
 class FavoritesView: UIView {
     
-    public lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Hello User"
-        label.textAlignment = .center
-        return label
+    public lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        cv.backgroundColor = .systemTeal
+        return cv
     }()
     
     override init(frame: CGRect) {
@@ -28,18 +29,18 @@ class FavoritesView: UIView {
     }
     
     private func commonInit() {
-        configureTitleLabel()
+        configureCollectionView()
     }
     
-    func configureTitleLabel() {
-    addSubview(titleLabel)
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    private func configureCollectionView() {
+        addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: 8)
+            collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
-        
     }
     
 }

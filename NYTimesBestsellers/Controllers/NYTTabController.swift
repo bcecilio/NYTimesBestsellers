@@ -37,7 +37,7 @@ class NYTTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        viewControllers = [viewController, favoritesController, settingsController]
+        viewControllers = [viewController, UINavigationController(rootViewController: favoritesController), settingsController]
     }
     
     private func loadData() {
