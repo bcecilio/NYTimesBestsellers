@@ -89,6 +89,5 @@ extension FavoritesController: FavoritesCellDelegate {
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
-    
-    
+        
 }
