@@ -11,13 +11,19 @@ import DataPersistence
 
 class ViewController: UIViewController {
     
-    private let listType: [ListType]
+    private var listTypes: [ListType] {
+        didSet {
+            // reloads pickerView
+            initialView.pickerView.reloadAllComponents()
+        }
+    }
     private let dataPersistence: DataPersistence<Book>
     
     init(_ dataPersistence: DataPersistence<Book>, listType: [ListType]) {
         self.dataPersistence = dataPersistence
-        self.listType = listType
+        self.listTypes = listType
         super.init(nibName: nil, bundle: nil)
+        loadData()
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +46,22 @@ class ViewController: UIViewController {
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
+    }
+    
+    private func loadData() {
+        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTKey.key)"
+        
+        GenericCoderAPI.manager.getJSON(objectType: ListTypeWrapper.self, with: endpoint) { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+                break
+            case .success(let wrapper):
+                DispatchQueue.main.async {
+                    self.listTypes = wrapper.results
+                }
+            }
+        }
     }
 }
 
