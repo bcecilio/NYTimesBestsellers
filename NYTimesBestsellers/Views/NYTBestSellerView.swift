@@ -35,6 +35,7 @@ class NYTBestSellerView: UIView {
     
     private func commonInit() {
         setupCollectionView()
+        setupPickerView()
     }
     
     private func setupCollectionView() {
@@ -44,6 +45,17 @@ class NYTBestSellerView: UIView {
             collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    }
+    
+    private func setupPickerView() {
+        addSubview(pickerView)
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pickerView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
+            pickerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            pickerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            pickerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
