@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .systemGreen
         initialView.collectionView.delegate = self
         initialView.collectionView.dataSource = self
-        initialView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "bestsellerCell")
+        initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
     }
@@ -35,7 +35,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestsellerCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestsellerCell", for: indexPath) as? BestsellerCell else {
+            fatalError("could not downcast BestsellerCell")
+        }
         cell.backgroundColor = .white
         return cell
     }
