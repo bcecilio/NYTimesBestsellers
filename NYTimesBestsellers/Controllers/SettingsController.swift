@@ -7,9 +7,23 @@
 //
 
 import UIKit
+import DataPersistence
 
 class SettingsController: UIViewController {
-
+    
+    private let listType: [ListType]
+    private let dataPersistence: DataPersistence<Book>
+    
+    init(_ dataPersistence: DataPersistence<Book>, listType: [ListType]) {
+        self.dataPersistence = dataPersistence
+        self.listType = listType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
