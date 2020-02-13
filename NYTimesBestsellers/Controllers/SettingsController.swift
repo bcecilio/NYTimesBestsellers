@@ -11,12 +11,24 @@ import DataPersistence
 
 class SettingsController: UIViewController {
     
-    private let listType: [ListType]
+    
+    let settingsView = SettingsView()
+
+    
+    private var listTypes = [ListType]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.settingsView.picker.reloadAllComponents()
+            }
+        }
+    }
+    
+    
     private let dataPersistence: DataPersistence<Book>
     
     init(_ dataPersistence: DataPersistence<Book>, listType: [ListType]) {
         self.dataPersistence = dataPersistence
-        self.listType = listType
+        self.listTypes  = listType
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,11 +37,6 @@ class SettingsController: UIViewController {
     }
     
 
-    
-    let settingsView = SettingsView()
-    
-    let sections = ["section 1","section 2","section 3","section 4","section 5","section 6"]
-    
     
     override func loadView() {
         view = settingsView
@@ -41,7 +48,30 @@ class SettingsController: UIViewController {
         view.backgroundColor = .systemBackground
         settingsView.picker.dataSource = self
         settingsView.picker.delegate = self
+        loadData()
     }
+    
+    
+    private func loadData() {
+        
+           let endpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTKey.key)"
+           
+           GenericCoderAPI.manager.getJSON(objectType: ListTypeWrapper.self, with: endpoint) { result in
+               switch result {
+               case .failure(let error):
+                   print(error)
+                   break
+               case .success(let wrapper):
+                   DispatchQueue.main.async {
+                       self.listTypes = wrapper.results
+                   }
+               }
+           }
+       }
+    
+    
+    
+    
     
 }
 
@@ -51,7 +81,7 @@ extension SettingsController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sections.count
+        return listTypes.count
     }
     
     
@@ -59,6 +89,6 @@ extension SettingsController: UIPickerViewDataSource {
 
 extension SettingsController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sections[row]
+        return listTypes[row].listName
     }
 }
