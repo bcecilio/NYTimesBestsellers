@@ -10,7 +10,7 @@ import UIKit
 
 class NYTBestSellerView: UIView {
     
-    private lazy var collectionView: UICollectionView = {
+    public lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -18,7 +18,7 @@ class NYTBestSellerView: UIView {
         return collection
     }()
     
-    private lazy var pickerView: UIPickerView = {
+    public lazy var pickerView: UIPickerView = {
         let picker = UIPickerView()
         picker.backgroundColor = .systemGroupedBackground
         return picker
