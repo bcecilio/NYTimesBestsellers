@@ -13,6 +13,7 @@ class BestsellerCell: UICollectionViewCell {
     public var bookImageView: UIImageView = {
        let image = UIImageView()
         image.image = UIImage(systemName: "book")
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -54,7 +55,7 @@ class BestsellerCell: UICollectionViewCell {
             bookImageView.topAnchor.constraint(equalTo: topAnchor),
             bookImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bookImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bookImageView.heightAnchor.constraint(equalToConstant: 250)
+            bookImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 4)
         ])
     }
     
@@ -65,7 +66,7 @@ class BestsellerCell: UICollectionViewCell {
             titleLabel.topAnchor.constraint(equalTo: bookImageView.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.height)
         ])
     }
     
@@ -73,7 +74,7 @@ class BestsellerCell: UICollectionViewCell {
         addSubview(bookDescriptionLabel)
         bookDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            bookDescriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
+            bookDescriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3),
             bookDescriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             bookDescriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             bookDescriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
