@@ -10,21 +10,40 @@ import UIKit
 
 class SettingsController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    let settingsView = SettingsView()
+    
+    let sections = ["section 1","section 2","section 3","section 4","section 5","section 6"]
+    
+    
+    override func loadView() {
+        view = settingsView
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        settingsView.picker.dataSource = self
+        settingsView.picker.delegate = self
     }
-    */
+    
+}
 
+extension SettingsController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sections.count
+    }
+    
+    
+}
+
+extension SettingsController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return sections[row]
+    }
 }
