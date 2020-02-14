@@ -24,8 +24,10 @@ class FavoritesController: UIViewController {
     
     var favoritesView = FavoritesView()
     
+    var emptyView = EmptyView(title: "Saved Books", message: "There are currently no saved books.")
+    
     override func loadView() {
-        view = favoritesView
+        view = emptyView
     }
     
     override func viewDidLoad() {

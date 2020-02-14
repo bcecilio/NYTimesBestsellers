@@ -11,17 +11,11 @@ import DataPersistence
 
 class ViewController: UIViewController {
     
-    private var listTypes: [ListType] {
-        didSet {
-            // reloads pickerView
-            initialView.pickerView.reloadAllComponents()
-        }
-    }
+    private var listType = List.categories
     private let dataPersistence: DataPersistence<Book>
     
-    init(_ dataPersistence: DataPersistence<Book>, listType: [ListType]) {
+    init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
-        self.listTypes = listType
         super.init(nibName: nil, bundle: nil)
         loadData()
     }
