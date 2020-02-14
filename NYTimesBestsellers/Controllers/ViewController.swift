@@ -8,15 +8,15 @@
 
 import UIKit
 import DataPersistence
+import ImageKit
 
 class ViewController: UIViewController {
     
-    private let listType: [ListType]
+    private var listType = List.categories
     private let dataPersistence: DataPersistence<Book>
     
-    init(_ dataPersistence: DataPersistence<Book>, listType: [ListType]) {
+    init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
-        self.listType = listType
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .white
         initialView.collectionView.delegate = self
         initialView.collectionView.dataSource = self
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
@@ -73,10 +73,10 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sections.count
+        return List.categories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sections[row]
+        return List.categories[row]
     }
 }

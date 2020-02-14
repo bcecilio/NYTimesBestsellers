@@ -11,29 +11,11 @@ import DataPersistence
 
 class SettingsController: UIViewController {
     
-    
-    let settingsView = SettingsView()
-    
-    private var listTypes = [ListType]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.settingsView.picker.reloadAllComponents()
-            }
-        }
-    }
-    
-
-    
-    
-    
-    
-    
-    
+    private var listType = List.categories
     private let dataPersistence: DataPersistence<Book>
     
-    init(_ dataPersistence: DataPersistence<Book>, listType: [ListType]) {
+    init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
-        self.listTypes  = listType
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,7 +35,6 @@ class SettingsController: UIViewController {
         view.backgroundColor = .systemBackground
         settingsView.picker.dataSource = self
         settingsView.picker.delegate = self
-        loadData()
         //settingsView.picker.selectRow(7, inComponent: 0, animated: true)
         checkForDefaultSettings()
         
@@ -71,29 +52,6 @@ class SettingsController: UIViewController {
     }
         
         
-        
-    
-    
-    
-    
-    
-    private func loadData() {
-        
-           let endpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTKey.key)"
-           
-           GenericCoderAPI.manager.getJSON(objectType: ListTypeWrapper.self, with: endpoint) { result in
-               switch result {
-               case .failure(let error):
-                   print(error)
-                   break
-               case .success(let wrapper):
-                   DispatchQueue.main.async {
-                       self.listTypes = wrapper.results
-                    self.checkForDefaultSettings()
-                   }
-               }
-           }
-       }
 }
 
 extension SettingsController: UIPickerViewDataSource {
@@ -110,7 +68,7 @@ extension SettingsController: UIPickerViewDataSource {
 
 extension SettingsController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return listTypes[row].listName
+        return listTypes[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         UserPreferences.helper.store(listNum: row)
