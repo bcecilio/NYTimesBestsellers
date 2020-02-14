@@ -36,7 +36,6 @@ class SettingsController: UIViewController {
         view.backgroundColor = .systemBackground
         settingsView.picker.dataSource = self
         settingsView.picker.delegate = self
-        //settingsView.picker.selectRow(7, inComponent: 0, animated: true)
         checkForDefaultSettings()
         
     }
@@ -46,13 +45,8 @@ class SettingsController: UIViewController {
       
         if let row = UserPreferences.helper.getListing() {
             settingsView.picker.selectRow(row, inComponent: 0, animated: true)
-       } else {
-            print("Else being called")
         }
-        
     }
-        
-        
 }
 
 extension SettingsController: UIPickerViewDataSource {
