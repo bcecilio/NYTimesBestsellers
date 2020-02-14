@@ -104,6 +104,13 @@ extension FavoritesController: UICollectionViewDelegateFlowLayout {
         let itemHeight: CGFloat = maxSize.height * 0.40
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let book = books[indexPath.row]
+        let detailVC = BookDetailController(dataPersistence, book: book)
+        navigationController?.pushViewController(detailVC, animated: true)
+        
+    }
 }
 
 extension FavoritesController: FavoritesCellDelegate {
@@ -132,7 +139,7 @@ extension FavoritesController: FavoritesCellDelegate {
         do {
             try dataPersistence.deleteItem(at: index)
         } catch {
-            print("error")
+            print("error: \(error)")
         }
     }
     
