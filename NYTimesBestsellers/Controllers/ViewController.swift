@@ -24,6 +24,8 @@ class ViewController: UIViewController {
         }
     }
     
+    private var sectionDefault = "Combined Print and E-Book Fiction"
+    
     init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
@@ -46,10 +48,16 @@ class ViewController: UIViewController {
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
         loadBooks(string: List.encodedCategories[0])
+        getDefaultBooks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
+        getDefaultBooks()
+    }
+    
+    private func getDefaultBooks() {
+        let row = UserPreferences.helper.getListing()
     }
     
     private func loadBooks(string: String) {
@@ -74,8 +82,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestsellerCell", for: indexPath) as? BestsellerCell else {
             fatalError("could not downcast BestsellerCell")
         }
+        let bookCell = books[indexPath.row]
         cell.backgroundColor = .white
-        cell.configureCell(book: books[indexPath.row])
+        cell.configureCell(book: bookCell)
         return cell
     }
     
@@ -87,6 +96,12 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         let totalSpacing: CGFloat = (2 * spacingBetweenItems) + (numberOfItems - 1 ) * spacingBetweenItems
         let itemWidth: CGFloat = (maxSize.width - totalSpacing) / numberOfItems
         return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedbook = books[indexPath.row]
+        let detailController = BookDetailController(dataPersistence, book: selectedbook)
+        navigationController?.pushViewController(detailController, animated: true)
     }
 }
 
@@ -105,5 +120,6 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         loadBooks(string: List.encodedCategories[row])
+        getDefaultBooks()
     }
 }
