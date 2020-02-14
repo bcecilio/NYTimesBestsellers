@@ -35,7 +35,7 @@ class BookDetailController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        detailView.configureView(book)
     }
     
 }

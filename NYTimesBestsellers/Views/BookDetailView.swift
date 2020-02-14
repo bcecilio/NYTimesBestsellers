@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 protocol BookDetailViewDelegate: AnyObject {
     func didPressButton()
@@ -28,8 +29,8 @@ class BookDetailView: UIView {
     }()
     
     public lazy var titleLabel: UILabel = {
-      let label = UILabel()
-      return label
+        let label = UILabel()
+        return label
     }()
     
     public lazy var textView: UITextView = {
@@ -48,6 +49,7 @@ class BookDetailView: UIView {
     }
     
     private func commonInit() {
+        backgroundColor = .secondarySystemBackground
         configureButton()
         configureImageView()
         configureTitleLabel()
@@ -61,11 +63,27 @@ class BookDetailView: UIView {
         delegate?.didPressButton()
     }
     
+    public func configureView(_ book: Book) {
+        titleLabel.text = book.title
+        textView.text = book.bookDescription
+        imageView.getImage(with: book.bookImage, writeTo: .cachesDirectory) { result in
+            switch result {
+            case .failure:
+                break
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            }
+        }
+        
+    }
+    
     private func configureButton() {
         addSubview(amazonButton)
         amazonButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            amazonButton.topAnchor.constraint(equalTo: topAnchor,constant: 8),
+            amazonButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,constant: 8),
             amazonButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
             amazonButton.heightAnchor.constraint(equalToConstant: 120),
             amazonButton.widthAnchor.constraint(equalTo: amazonButton.heightAnchor)
@@ -76,8 +94,8 @@ class BookDetailView: UIView {
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: amazonButton.frame.width + 12),
+            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8),
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             imageView.trailingAnchor.constraint(equalTo: amazonButton.leadingAnchor),
             imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
         ])
@@ -87,9 +105,9 @@ class BookDetailView: UIView {
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-              titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-              titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-              titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     
@@ -97,7 +115,7 @@ class BookDetailView: UIView {
         addSubview(textView)
         textView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 8),
+            textView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             textView.leadingAnchor.constraint(equalTo: leadingAnchor),
             textView.trailingAnchor.constraint(equalTo: trailingAnchor),
             textView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
