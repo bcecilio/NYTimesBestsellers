@@ -47,17 +47,17 @@ class ViewController: UIViewController {
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
-        loadBooks(string: List.encodedCategories[0])
         getDefaultBooks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getDefaultBooks()
     }
     
     private func getDefaultBooks() {
-        let row = UserPreferences.helper.getListing()
+        let row = UserPreferences.helper.getListing() ?? 0
+        self.initialView.pickerView.selectRow(row, inComponent: 0, animated: true)
+        loadBooks(string: List.encodedCategories[row])
     }
     
     private func loadBooks(string: String) {
@@ -120,6 +120,5 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         loadBooks(string: List.encodedCategories[row])
-        getDefaultBooks()
     }
 }
