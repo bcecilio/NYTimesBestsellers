@@ -57,7 +57,10 @@ class ViewController: UIViewController {
         GenericCoderAPI.manager.getJSON(objectType: ListWrapper.self, with: endpoint) { (result) in
             switch result {
             case .failure(let appError):
-                print("could not load data: \(appError)")
+                DispatchQueue.main.async {
+                    let alertvc = UIAlertController.errorAlert("Error ocurred: \(appError)")
+                    self.present(alertvc, animated: true, completion: nil)
+                }
             case .success(let wrapper):
                 self.books = wrapper.list.books
             }

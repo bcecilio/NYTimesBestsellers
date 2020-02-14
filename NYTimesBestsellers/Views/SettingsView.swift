@@ -16,7 +16,6 @@ class SettingsView: UIView {
     }()
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
             commonInit()

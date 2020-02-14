@@ -36,7 +36,6 @@ class BookDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
 }
@@ -48,10 +47,12 @@ extension BookDetailController: BookDetailViewDelegate {
                 try dataPersistence.createItem(book)
             } else {
                 // TODO: Present an error controller
-                print("Item has already been saved.")
+                let alertvc = UIAlertController.errorAlert("Item has already been saved.")
+                present(alertvc, animated: true, completion: nil)
             }
         } catch {
-            print(error)
+            let alertvc = UIAlertController.errorAlert("Error ocurred: \(error)")
+            present(alertvc, animated: true, completion: nil)
         }
     }
 }

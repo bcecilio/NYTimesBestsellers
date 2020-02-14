@@ -117,7 +117,7 @@ class FavoritesCell: UICollectionViewCell {
         imageView.getImage(with: book.bookImage) { (result) in
             switch result {
             case .failure(let appError):
-                print("app error \(appError)")
+                break
             case .success(let image):
                 DispatchQueue.main.async {
                     self.imageView.image = image

@@ -59,7 +59,8 @@ class FavoritesController: UIViewController {
         do {
             books = try dataPersistence.loadItems()
         } catch {
-            print("could not load books")
+            let alertvc = UIAlertController.errorAlert("Could not load books")
+            present(alertvc, animated: true, completion: nil)
         }
     }
   

@@ -6,4 +6,12 @@
 //  Copyright © 2020 Brendon Cecilio. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UIAlertController {
+    public static func errorAlert(_ body: String) -> UIAlertController {
+        let alertvc = UIAlertController(title: "Error", message: body, preferredStyle: .alert)
+        alertvc.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        return alertvc
+    }
+}
