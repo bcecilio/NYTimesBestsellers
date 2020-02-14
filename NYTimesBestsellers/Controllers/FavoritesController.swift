@@ -115,7 +115,8 @@ extension FavoritesController: FavoritesCellDelegate {
         let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let amazonAction = UIAlertAction(title: "View on Amazon", style: .default) { alertAction in
-            guard let url = URL(string: "https://www.amazon.com/Digital-Minimalism-Choosing-Focused-Noisy/dp/0525536515/ref=asc_df_0525536515/?tag=hyprod-20&linkCode=df0&hvadid=312143020546&hvpos=1o1&hvnetw=g&hvrand=17488743285732611120&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9004331&hvtargid=pla-562513904368&psc=1") else { return }
+            let amazonLink = self.books.first?.amazonProductURL
+            guard let url = URL(string: amazonLink ?? "") else { return }
             UIApplication.shared.open(url)
         }
         
