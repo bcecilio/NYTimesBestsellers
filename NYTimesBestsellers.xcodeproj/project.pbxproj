@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B702081F23F7308C00D6730C /* UIAlertController+ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B702081E23F7308C00D6730C /* UIAlertController+ErrorAlert.swift */; };
 		B7517DAA23EDFA8B00F52394 /* NYTKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7517DA923EDFA8B00F52394 /* NYTKey.swift */; };
 		B762E64123EB5640002AE005 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64023EB5640002AE005 /* AppDelegate.swift */; };
 		B762E64323EB5640002AE005 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E64223EB5640002AE005 /* SceneDelegate.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B702081E23F7308C00D6730C /* UIAlertController+ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ErrorAlert.swift"; sourceTree = "<group>"; };
 		B7517DA923EDFA8B00F52394 /* NYTKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYTKey.swift; sourceTree = "<group>"; };
 		B762E63D23EB5640002AE005 /* NYTimesBestsellers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NYTimesBestsellers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B762E64023EB5640002AE005 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B702082023F7309A00D6730C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B702081E23F7308C00D6730C /* UIAlertController+ErrorAlert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B762E63423EB5640002AE005 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +119,7 @@
 		B762E63F23EB5640002AE005 /* NYTimesBestsellers */ = {
 			isa = PBXGroup;
 			children = (
+				B702082023F7309A00D6730C /* Extensions */,
 				BE22B3B623EB705D0087A37D /* Secrets */,
 				B762E68223EB5960002AE005 /* Cells */,
 				B762E67B23EB5860002AE005 /* Services */,
@@ -322,6 +333,7 @@
 				B762E67D23EB5880002AE005 /* GenericCoderAPI.swift in Sources */,
 				B762E66D23EB5704002AE005 /* NYTBook.swift in Sources */,
 				BE6184B923F5E00E00CA891A /* NYTList.swift in Sources */,
+				B702081F23F7308C00D6730C /* UIAlertController+ErrorAlert.swift in Sources */,
 				B762E66423EB56A2002AE005 /* FavoritesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

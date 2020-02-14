@@ -32,8 +32,10 @@ class NYTimesBestsellersTests: XCTestCase {
     }
     
     func testBestSellersByList() {
+        // 
         let listNameEncoded = "hardcover-fiction"
-        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/current/\(listNameEncoded).json?api-key=\(NYTKey.key)"
+        let listnames = List.encodedCategories
+        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/current/\(listnames[0]).json?api-key=\(NYTKey.key)"
         var books = [Book]()
         let exp = XCTestExpectation(description: "Created test for something")
         
