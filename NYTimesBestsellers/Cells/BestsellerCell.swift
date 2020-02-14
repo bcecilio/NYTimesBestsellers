@@ -81,4 +81,21 @@ class BestsellerCell: UICollectionViewCell {
             bookDescriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
+    
+    public func configureCell(book: Book) {
+        bookImageView.getImage(with: book.bookImage) { [weak self] (result) in
+            switch result {
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self?.bookImageView.image = UIImage(systemName: "book")
+                }
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.bookImageView.image = image
+                }
+            }
+        }
+        titleLabel.text = book.title
+        bookDescriptionLabel.text = book.bookDescription
+    }
 }

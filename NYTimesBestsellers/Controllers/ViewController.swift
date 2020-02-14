@@ -12,8 +12,15 @@ import ImageKit
 
 class ViewController: UIViewController {
     
+    private let initialView = NYTBestSellerView()
     private var listType = List.categories
     private let dataPersistence: DataPersistence<Book>
+    
+    private var books = [Book]() {
+        DispatchQueue.main.async {
+            
+        }
+    }
     
     init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
@@ -23,10 +30,6 @@ class ViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private let initialView = NYTBestSellerView()
-    
-    let sections = ["section 1","section 2","section 3","section 4","section 5","section 6"]
     
     override func loadView() {
         view = initialView
@@ -41,18 +44,40 @@ class ViewController: UIViewController {
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        loadBooks()
+    }
+    
+    private func loadBooks() {
+        let value = initialView.pickerView.selectedRow(inComponent: 0)
+        
+        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/current/\(List.encodedCategories[value]).json?api-key=\(NYTKey.key)"
+        
+        GenericCoderAPI.manager.getJSON(objectType: ListWrapper.self, with: endpoint) { (result) in
+            switch result {
+            case .failure(let appError):
+                print("could not load data: \(appError)")
+            case .success(let books):
+                self.books = books.list.books
+            }
+        }
+    }
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return listType.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestsellerCell", for: indexPath) as? BestsellerCell else {
             fatalError("could not downcast BestsellerCell")
         }
+        let bookCell = books[indexPath.row]
         cell.backgroundColor = .white
+        cell.configureCell(book: bookCell)
         return cell
     }
     
