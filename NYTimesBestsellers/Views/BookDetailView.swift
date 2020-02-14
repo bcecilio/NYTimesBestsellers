@@ -15,25 +15,26 @@ protocol BookDetailViewDelegate: AnyObject {
 
 class BookDetailView: UIView {
     
-    public lazy var amazonButton: UIButton = {
+    private lazy var amazonButton: UIButton = {
+        //TODO: Create photo.
         let button = UIButton()
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return button
     }()
     
-    public lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "photo")
         iv.contentMode = .scaleAspectFit
         return iv
     }()
     
-    public lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    public lazy var textView: UITextView = {
+    private lazy var textView: UITextView = {
         let textView = UITextView()
         return textView
     }()

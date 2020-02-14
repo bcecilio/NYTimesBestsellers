@@ -12,6 +12,11 @@ import ImageKit
 
 class BookDetailController: UIViewController {
     
+    private lazy var button: UIBarButtonItem = {
+        let b = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(buttonPressed(_:)))
+        return b
+    }()
+    
     private let detailView = BookDetailView()
     
     private let dataPersistence: DataPersistence<Book>
@@ -21,7 +26,6 @@ class BookDetailController: UIViewController {
         self.dataPersistence = dataPersistence
         self.book = book
         super.init(nibName: nil, bundle: nil)
-        self.detailView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -32,27 +36,33 @@ class BookDetailController: UIViewController {
         super.loadView()
         view = detailView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         detailView.configureView(book)
+        setupBarButton()
     }
     
-}
-
-extension BookDetailController: BookDetailViewDelegate {
-    func didPressButton() {
-        do {
-            if !dataPersistence.hasItemBeenSaved(book) {
+    @objc private func buttonPressed(_ sender: UIBarButtonItem) {
+        if !dataPersistence.hasItemBeenSaved(book) {
+            do {
                 try dataPersistence.createItem(book)
-            } else {
-                // TODO: Present an error controller
-                let alertvc = UIAlertController.errorAlert("Item has already been saved.")
+                let alertvc = UIAlertController(title: "Saved", message: "Item has been saved.", preferredStyle: .alert)
+                alertvc.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                present(alertvc, animated: true)
+            } catch {
+                let alertvc = UIAlertController.errorAlert("Error ocurred: \(error)")
                 present(alertvc, animated: true, completion: nil)
             }
-        } catch {
-            let alertvc = UIAlertController.errorAlert("Error ocurred: \(error)")
+        } else {
+            let alertvc = UIAlertController.errorAlert("Item has already been saved.")
             present(alertvc, animated: true, completion: nil)
         }
+        
     }
+    
+    private func setupBarButton() {
+        navigationItem.setRightBarButton(button, animated: true)
+    }
+    
 }
