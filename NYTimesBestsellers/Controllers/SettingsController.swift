@@ -25,11 +25,6 @@ class SettingsController: UIViewController {
     
 
     
-    let settingsView = SettingsView()
-    
-    let sections = ["section 1","section 2","section 3","section 4","section 5","section 6"]
-    
-    
     override func loadView() {
         view = settingsView
     }
@@ -40,8 +35,23 @@ class SettingsController: UIViewController {
         view.backgroundColor = .systemBackground
         settingsView.picker.dataSource = self
         settingsView.picker.delegate = self
+        //settingsView.picker.selectRow(7, inComponent: 0, animated: true)
+        checkForDefaultSettings()
+        
     }
     
+    
+    private func checkForDefaultSettings() {
+      
+        if let row = UserPreferences.helper.getListing() {
+            settingsView.picker.selectRow(row, inComponent: 0, animated: true)
+       } else {
+            print("Else being called")
+        }
+        
+    }
+        
+        
 }
 
 extension SettingsController: UIPickerViewDataSource {
@@ -50,7 +60,7 @@ extension SettingsController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sections.count
+        return listTypes.count
     }
     
     
@@ -58,6 +68,9 @@ extension SettingsController: UIPickerViewDataSource {
 
 extension SettingsController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sections[row]
+        return listTypes[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        UserPreferences.helper.store(listNum: row)
     }
 }

@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+
+
+class UserPreferences {
+    static let helper = UserPreferences()
+    private let listingKey = "listing"
+    private init () {}
+    func store(listNum: Int) {
+        UserDefaults.standard.set(listNum, forKey: listingKey)
+    }
+    func getListing() -> Int? {
+        UserDefaults.standard.integer(forKey: listingKey)
+    }
+}
