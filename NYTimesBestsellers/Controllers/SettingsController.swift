@@ -11,8 +11,9 @@ import DataPersistence
 
 class SettingsController: UIViewController {
     
-    private var listType = List.categories
+    private var listTypes = List.categories
     private let dataPersistence: DataPersistence<Book>
+    private let settingsView = SettingsView()
     
     init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
