@@ -104,7 +104,7 @@ struct Book: Codable, Equatable {
     let primaryIsbn13: String
     let publisher: String
     let bookDescription: String
-    let price: Int
+    let price: Double
     let title: String
     let author: String
     let contributor: String
