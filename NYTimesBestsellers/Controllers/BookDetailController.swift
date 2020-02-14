@@ -12,7 +12,7 @@ import ImageKit
 
 class BookDetailController: UIViewController {
     
-    private let detailVC = BookDetailView()
+    private let detailView = BookDetailView()
     
     private let dataPersistence: DataPersistence<Book>
     private let book: Book
@@ -28,7 +28,7 @@ class BookDetailController: UIViewController {
     }
     
     override func loadView() {
-        view = detailVC
+        view = detailView
     }
 
     override func viewDidLoad() {
