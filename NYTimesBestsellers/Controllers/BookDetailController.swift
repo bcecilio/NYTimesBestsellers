@@ -21,6 +21,7 @@ class BookDetailController: UIViewController {
         self.dataPersistence = dataPersistence
         self.book = book
         super.init(nibName: nil, bundle: nil)
+        self.detailView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -28,6 +29,7 @@ class BookDetailController: UIViewController {
     }
     
     override func loadView() {
+        super.loadView()
         view = detailView
     }
 
@@ -37,4 +39,19 @@ class BookDetailController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+}
+
+extension BookDetailController: BookDetailViewDelegate {
+    func didPressButton() {
+        do {
+            if !dataPersistence.hasItemBeenSaved(book) {
+                try dataPersistence.createItem(book)
+            } else {
+                // TODO: Present an error controller
+                print("Item has already been saved.")
+            }
+        } catch {
+            print(error)
+        }
+    }
 }

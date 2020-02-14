@@ -8,14 +8,17 @@
 
 import UIKit
 
-class BookDetailView: UIView {
+protocol BookDetailViewDelegate: AnyObject {
+    func didPressButton()
+}
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class BookDetailView: UIView {
+    
+    public weak var delegate: BookDetailViewDelegate?
+    
+    @objc private func buttonPressed(_ sender: UIButton) {
+        /// Add this action to a button that saves the book in detail.
+        delegate?.didPressButton()
     }
-    */
 
 }
