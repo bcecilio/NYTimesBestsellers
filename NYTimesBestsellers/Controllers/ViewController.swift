@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
+        loadData()
     }
     
     required init?(coder: NSCoder) {
@@ -33,12 +34,28 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .white
         initialView.collectionView.delegate = self
         initialView.collectionView.dataSource = self
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
+    }
+    
+    private func loadData() {
+        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTKey.key)"
+        
+        GenericCoderAPI.manager.getJSON(objectType: ListTypeWrapper.self, with: endpoint) { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+                break
+            case .success(let wrapper):
+                DispatchQueue.main.async {
+                    self.listTypes = wrapper.results
+                }
+            }
+        }
     }
 }
 
