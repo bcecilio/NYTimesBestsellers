@@ -28,9 +28,7 @@ class FavoritesController: UIViewController {
     
     var books = [Book]() {
         didSet {
-            DispatchQueue.main.async {
-                self.favoritesView.collectionView.reloadData()
-            }
+            self.favoritesView.collectionView.reloadData()
             if books.isEmpty {
                 favoritesView.collectionView.backgroundView = EmptyView(title: "Saved Books", message: "There are currently no saved Books.")
             } else {
@@ -41,6 +39,7 @@ class FavoritesController: UIViewController {
     }
     
     override func loadView() {
+        super.loadView()
         view = favoritesView
     }
     
@@ -140,12 +139,10 @@ extension FavoritesController: FavoritesCellDelegate {
 
 extension FavoritesController: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("book was saved")
         loadBooks()
     }
     
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("book was deleted")
         loadBooks()
     }
     
