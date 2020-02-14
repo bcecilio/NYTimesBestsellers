@@ -26,15 +26,12 @@ class FavoritesController: UIViewController {
     
     var favoritesView = FavoritesView()
     
-//    var emptyView = EmptyView(title: "Saved Books", message: "There are currently no saved books.")
-    
     var books = [Book]() {
         didSet {
             DispatchQueue.main.async {
                 self.favoritesView.collectionView.reloadData()
             }
             if books.isEmpty {
-                // set up pur empty view here
                 favoritesView.collectionView.backgroundView = EmptyView(title: "Saved Books", message: "There are currently no saved Books.")
             } else {
                 favoritesView.collectionView.backgroundView = nil
@@ -110,9 +107,11 @@ extension FavoritesController: UICollectionViewDelegateFlowLayout {
 }
 
 extension FavoritesController: FavoritesCellDelegate {
-    func moreButtonPressed(_ favoritesCell: FavoritesCell) {
+    func moreButtonPressed(_ favoritesCell: FavoritesCell, book: Book) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "Delete", style: .default, handler: nil)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alertAction in
+            self.deleteBook(book)
+               }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let amazonAction = UIAlertAction(title: "View on Amazon", style: .default) { alertAction in
             let amazonLink = self.books.first?.amazonProductURL
@@ -124,6 +123,17 @@ extension FavoritesController: FavoritesCellDelegate {
         alertController.addAction(amazonAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
+    }
+    
+    private func deleteBook(_ book: Book) {
+        guard let index = books.firstIndex(of: book) else {
+            return
+        }
+        do {
+            try dataPersistence.deleteItem(at: index)
+        } catch {
+            print("error")
+        }
     }
     
 }

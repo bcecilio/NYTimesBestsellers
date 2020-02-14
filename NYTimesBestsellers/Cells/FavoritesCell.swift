@@ -10,7 +10,7 @@ import UIKit
 import ImageKit
 
 protocol FavoritesCellDelegate: AnyObject {
-    func moreButtonPressed(_ favoritesCell: FavoritesCell)
+    func moreButtonPressed(_ favoritesCell: FavoritesCell, book: Book)
 }
 
 class FavoritesCell: UICollectionViewCell {
@@ -47,7 +47,7 @@ class FavoritesCell: UICollectionViewCell {
     }()
     
     @objc func buttonPressed() {
-        delegate?.moreButtonPressed(self)
+        delegate?.moreButtonPressed(self, book: currentBook)
     }
     
     
