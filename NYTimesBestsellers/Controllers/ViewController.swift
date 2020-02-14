@@ -17,8 +17,10 @@ class ViewController: UIViewController {
     private let dataPersistence: DataPersistence<Book>
     
     private var books = [Book]() {
-        DispatchQueue.main.async {
-            
+        didSet {
+            DispatchQueue.main.async {
+                self.initialView.collectionView.reloadData()
+            }
         }
     }
     
@@ -34,7 +36,7 @@ class ViewController: UIViewController {
     override func loadView() {
         view = initialView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -43,24 +45,21 @@ class ViewController: UIViewController {
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
+        loadBooks(string: List.encodedCategories[0])
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        loadBooks()
+        super.viewWillAppear(animated)
     }
     
-    private func loadBooks() {
-        let value = initialView.pickerView.selectedRow(inComponent: 0)
-        
-        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/current/\(List.encodedCategories[value]).json?api-key=\(NYTKey.key)"
-        
+    private func loadBooks(string: String) {
+        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/current/\(string).json?api-key=\(NYTKey.key)"
         GenericCoderAPI.manager.getJSON(objectType: ListWrapper.self, with: endpoint) { (result) in
             switch result {
             case .failure(let appError):
                 print("could not load data: \(appError)")
-            case .success(let books):
-                self.books = books.list.books
+            case .success(let wrapper):
+                self.books = wrapper.list.books
             }
         }
     }
@@ -68,16 +67,15 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listType.count
+        return books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestsellerCell", for: indexPath) as? BestsellerCell else {
             fatalError("could not downcast BestsellerCell")
         }
-        let bookCell = books[indexPath.row]
         cell.backgroundColor = .white
-        cell.configureCell(book: bookCell)
+        cell.configureCell(book: books[indexPath.row])
         return cell
     }
     
@@ -103,5 +101,9 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return List.categories[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        loadBooks(string: List.encodedCategories[row])
     }
 }
