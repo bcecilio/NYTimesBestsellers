@@ -24,35 +24,24 @@ class SettingsController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-    
     override func loadView() {
         view = settingsView
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         settingsView.picker.dataSource = self
         settingsView.picker.delegate = self
-        //settingsView.picker.selectRow(7, inComponent: 0, animated: true)
         checkForDefaultSettings()
-        
     }
     
     
     private func checkForDefaultSettings() {
-      
         if let row = UserPreferences.helper.getListing() {
             settingsView.picker.selectRow(row, inComponent: 0, animated: true)
-       } else {
-            print("Else being called")
         }
-        
     }
-        
-        
 }
 
 extension SettingsController: UIPickerViewDataSource {
