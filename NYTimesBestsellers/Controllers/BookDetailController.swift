@@ -7,8 +7,31 @@
 //
 
 import UIKit
+import DataPersistence
+import ImageKit
 
 class BookDetailController: UIViewController {
+    
+    private let detailView = BookDetailView()
+    
+    private let dataPersistence: DataPersistence<Book>
+    private let book: Book
+    
+    init(_ dataPersistence: DataPersistence<Book>, book: Book) {
+        self.dataPersistence = dataPersistence
+        self.book = book
+        super.init(nibName: nil, bundle: nil)
+        self.detailView.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        super.loadView()
+        view = detailView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,15 +39,19 @@ class BookDetailController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension BookDetailController: BookDetailViewDelegate {
+    func didPressButton() {
+        do {
+            if !dataPersistence.hasItemBeenSaved(book) {
+                try dataPersistence.createItem(book)
+            } else {
+                // TODO: Present an error controller
+                print("Item has already been saved.")
+            }
+        } catch {
+            print(error)
+        }
     }
-    */
-
 }
