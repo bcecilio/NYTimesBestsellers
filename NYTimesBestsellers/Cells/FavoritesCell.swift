@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 protocol FavoritesCellDelegate: AnyObject {
     func moreButtonPressed(_ favoritesCell: FavoritesCell)
@@ -15,6 +16,8 @@ protocol FavoritesCellDelegate: AnyObject {
 class FavoritesCell: UICollectionViewCell {
     
     weak var delegate: FavoritesCellDelegate?
+    
+    var currentBook: Book!
     
     public lazy var textView: UITextView = {
         let textView = UITextView()
@@ -105,6 +108,22 @@ class FavoritesCell: UICollectionViewCell {
             textView.trailingAnchor.constraint(equalTo: trailingAnchor),
             textView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    public func configure(for book: Book) {
+        currentBook = book
+        weeksLabel.text = "\(book.weeksOnList.description) weeks in best sellers list"
+        textView.text = book.bookDescription
+        imageView.getImage(with: book.bookImage) { (result) in
+            switch result {
+            case .failure(let appError):
+                print("app error \(appError)")
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            }
+        }
     }
     
 }

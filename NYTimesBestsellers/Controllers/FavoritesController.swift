@@ -8,6 +8,7 @@
 
 import UIKit
 import DataPersistence
+import ImageKit
 
 class FavoritesController: UIViewController {
     
@@ -16,6 +17,7 @@ class FavoritesController: UIViewController {
     init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
+        self.dataPersistence.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -24,19 +26,47 @@ class FavoritesController: UIViewController {
     
     var favoritesView = FavoritesView()
     
-    var emptyView = EmptyView(title: "Saved Books", message: "There are currently no saved books.")
+//    var emptyView = EmptyView(title: "Saved Books", message: "There are currently no saved books.")
+    
+    var books = [Book]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.favoritesView.collectionView.reloadData()
+            }
+            if books.isEmpty {
+                // set up pur empty view here
+                favoritesView.collectionView.backgroundView = EmptyView(title: "Saved Books", message: "There are currently no saved Books.")
+            } else {
+                favoritesView.collectionView.backgroundView = nil
+            }
+
+        }
+    }
     
     override func loadView() {
-        view = emptyView
+        view = favoritesView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemTeal
+        view.backgroundColor = .systemBackground
         navigationItem.title = "Favorites"
         collectionViewExtensions()
         configureCell()
+        loadBooks()
     }
+    
+    
+    
+    
+    func loadBooks() {
+        do {
+            books = try dataPersistence.loadItems()
+        } catch {
+            print("could not load books")
+        }
+    }
+  
     
     func collectionViewExtensions() {
         favoritesView.collectionView.dataSource = self
@@ -53,15 +83,18 @@ class FavoritesController: UIViewController {
 
 extension FavoritesController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "favoritesCell", for: indexPath) as? FavoritesCell else {
             fatalError("error, could not get cell")
         }
+        let book = books[indexPath.row]
         cell.backgroundColor = .systemBackground
+        cell.configure(for: book)
         cell.delegate = self
+        
         return cell
     }
     
@@ -91,5 +124,19 @@ extension FavoritesController: FavoritesCellDelegate {
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
-        
+    
+}
+
+extension FavoritesController: DataPersistenceDelegate {
+    func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        print("book was saved")
+        loadBooks()
+    }
+    
+    func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
+        print("book was deleted")
+        loadBooks()
+    }
+    
+    
 }
