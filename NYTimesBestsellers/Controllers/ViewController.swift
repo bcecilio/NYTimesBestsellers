@@ -8,6 +8,7 @@
 
 import UIKit
 import DataPersistence
+import ImageKit
 
 class ViewController: UIViewController {
     
@@ -17,7 +18,6 @@ class ViewController: UIViewController {
     init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
-        loadData()
     }
     
     required init?(coder: NSCoder) {
@@ -40,22 +40,6 @@ class ViewController: UIViewController {
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
         initialView.pickerView.delegate = self
         initialView.pickerView.dataSource = self
-    }
-    
-    private func loadData() {
-        let endpoint = "https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=\(NYTKey.key)"
-        
-        GenericCoderAPI.manager.getJSON(objectType: ListTypeWrapper.self, with: endpoint) { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-                break
-            case .success(let wrapper):
-                DispatchQueue.main.async {
-                    self.listTypes = wrapper.results
-                }
-            }
-        }
     }
 }
 
@@ -89,10 +73,10 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sections.count
+        return List.categories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sections[row]
+        return List.categories[row]
     }
 }
