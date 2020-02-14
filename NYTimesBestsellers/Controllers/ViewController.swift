@@ -11,7 +11,7 @@ import DataPersistence
 
 class ViewController: UIViewController {
     
-    private var listType = [ListType]()
+    private var listType = List.categories
     private let dataPersistence: DataPersistence<Book>
     
     init(_ dataPersistence: DataPersistence<Book>) {
