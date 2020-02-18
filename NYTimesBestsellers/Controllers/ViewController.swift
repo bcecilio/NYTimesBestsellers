@@ -42,6 +42,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationItem.title = "NY Times Bestsellers"
         initialView.collectionView.delegate = self
         initialView.collectionView.dataSource = self
         initialView.collectionView.register(BestsellerCell.self, forCellWithReuseIdentifier: "bestsellerCell")
@@ -52,6 +53,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        getDefaultBooks()
     }
     
     private func getDefaultBooks() {
