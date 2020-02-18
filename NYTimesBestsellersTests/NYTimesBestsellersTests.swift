@@ -45,6 +45,9 @@ class NYTimesBestsellersTests: XCTestCase {
                 XCTFail("Failed to get JSON from link: \(error)")
             case .success(let wrapper):
                 books = wrapper.list.books
+                for book in books {
+                    XCTAssertEqual(book.buyLinks.count, 5)
+                }
                 XCTAssertEqual(books.count, wrapper.numResults)
                 exp.fulfill()
             }
