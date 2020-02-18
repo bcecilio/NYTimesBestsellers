@@ -25,8 +25,11 @@ The New York Times best sellers app allows user's to look, favorite, and shop fo
 
 ## Colaborators: 
 https://github.com/bcecilio
+
 https://github.com/oscarvictoria
+
 https://github.com/ahadislam1
+
 https://github.com/IanKBailey
 
 
