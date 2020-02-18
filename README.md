@@ -11,6 +11,37 @@ The New York Times best sellers app allows user's to look, favorite, and shop fo
 
 ## Screenshot
 
+## Code Snippet:
+
+Generic API Client:
+
+```swift
+func getJSON<T: Decodable>(objectType: T.Type, with urlString: String, completionHandler: @escaping (Result<T, AppError>) -> ()) {
+        guard let url = URL(string: urlString) else {
+            completionHandler(.failure(.badURL(urlString)))
+            return
+        }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        NetworkHelper.shared.performDataTask(with: urlRequest, maxCacheDays: 3) { result in
+            switch result {
+            case .failure(let error):
+                completionHandler(.failure(.networkClientError(error)))
+            case .success(let data):
+                do {
+                    let model = try JSONDecoder().decode(T.self, from: data)
+                    completionHandler(.success(model))
+                } catch {
+                    completionHandler(.failure(.decodingError(error)))
+                }
+            }
+        }
+    }
+```
+
+Used one geeneric client so we didn't have to write numerous api clients that served the same purpose.
 
 
 ##  GIF
