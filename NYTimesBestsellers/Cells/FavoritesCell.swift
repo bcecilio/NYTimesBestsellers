@@ -30,6 +30,7 @@ class FavoritesCell: UICollectionViewCell {
     public lazy var weeksLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
+        label.textAlignment = .center
         return label
     }()
     
@@ -97,6 +98,7 @@ class FavoritesCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             weeksLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
             weeksLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            weeksLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     

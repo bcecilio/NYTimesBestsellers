@@ -9,6 +9,7 @@
 import UIKit
 import DataPersistence
 import ImageKit
+import SafariServices
 
 class FavoritesController: UIViewController {
     
@@ -109,7 +110,6 @@ extension FavoritesController: UICollectionViewDelegateFlowLayout {
         let book = books[indexPath.row]
         let detailVC = BookDetailController(dataPersistence, book: book)
         navigationController?.pushViewController(detailVC, animated: true)
-        
     }
 }
 
@@ -121,10 +121,12 @@ extension FavoritesController: FavoritesCellDelegate {
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let amazonAction = UIAlertAction(title: "View on Amazon", style: .default) { alertAction in
-            let amazonLink = book.amazonProductURL
-            //            let amazonLink = self.books.first?.amazonProductURL
-            guard let url = URL(string: amazonLink) else { return }
-            UIApplication.shared.open(url)
+            guard let url = URL(string: book.amazonProductURL) else {
+                self.present(UIAlertController.errorAlert("Could not bring up URL"), animated: true, completion: nil)
+                return
+            }
+            let safariVC = SFSafariViewController(url: url)
+            self.present(safariVC, animated: true)
         }
         
         alertController.addAction(deleteAction)
