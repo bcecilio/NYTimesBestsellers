@@ -40,6 +40,7 @@ class BookDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         detailView.delegate = self
         detailView.configureView(book)
         setupBarButton()
@@ -61,6 +62,20 @@ class BookDetailController: UIViewController {
             present(alertvc, animated: true, completion: nil)
         }
         
+    }
+    
+    private func loadData() {
+        let endpoint = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(book.primaryIsbn10)"
+        GenericCoderAPI.manager.getJSON(objectType: GoogleBookWrapper.self, with: endpoint) { result in
+            switch result {
+            case .failure(let _):
+                break
+            case .success(let wrapper):
+                DispatchQueue.main.async {
+                    self.detailView.configureText(wrapper.items[0])
+                }
+            }
+        }
     }
     
     private func setupBarButton() {

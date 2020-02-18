@@ -57,7 +57,7 @@ struct VolumeInfo: Codable {
     let authors: [String]
     let publisher: String
     let publishedDate: String
-    let volumeInfoDescription: String
+    let description: String
     let pageCount: Int
     let printType: String
     let categories: [String]
@@ -77,7 +77,7 @@ struct VolumeInfo: Codable {
         case authors = "authors"
         case publisher = "publisher"
         case publishedDate = "publishedDate"
-        case volumeInfoDescription = "description"
+        case description = "description"
         case pageCount = "pageCount"
         case printType = "printType"
         case categories = "categories"
