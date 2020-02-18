@@ -41,7 +41,7 @@ func getJSON<T: Decodable>(objectType: T.Type, with urlString: String, completio
     }
 ```
 
-Used one geeneric client so we didn't have to write numerous api clients that served the same purpose.
+Used one generic client so we didn't have to write numerous api clients that served the same purpose.
 
 
 ##  GIF
