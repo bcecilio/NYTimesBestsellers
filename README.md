@@ -11,6 +11,11 @@ The New York Times best sellers app allows user's to look, favorite, and shop fo
 
 ## Screenshot
 
+![homescreen](Assets/homescreen.png)
+![detailscreen](Assets/detailscreen.png)
+![favoritescreen](Assets/favoritesscreen.png)
+![settingsscreen](Assets/settings.png)
+
 ## Code Snippet:
 
 Generic API Client:
