@@ -46,7 +46,7 @@ Used one generic client so we didn't have to write numerous api clients that ser
 
 ##  GIF
 
-![](Assests/NYTimesBestsellersGif.gif)
+![](Assets/NYTimesBestsellersGif.gif)
 
 ## Collaborators: 
 * https://github.com/bcecilio
