@@ -46,6 +46,7 @@ class BookDetailView: UIView {
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
+        textView.font = UIFont.systemFont(ofSize: 14)
         return textView
     }()
     
@@ -89,6 +90,10 @@ class BookDetailView: UIView {
             }
         }
         
+    }
+    
+    public func configureText(_ str: String) {
+        textView.text = str
     }
     
     private func configureAmazonButton() {
