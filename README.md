@@ -49,12 +49,12 @@ Used one generic client so we didn't have to write numerous api clients that ser
 ![](Supporting Files/Assests/NYTimesBestsellersGif.gif)
 
 ## Collaborators: 
-https://github.com/bcecilio
+* https://github.com/bcecilio
 
-https://github.com/oscarvictoria
+* https://github.com/oscarvictoria
 
-https://github.com/ahadislam1
+* https://github.com/ahadislam1
 
-https://github.com/IanKBailey
+* https://github.com/IanKBailey
 
 
