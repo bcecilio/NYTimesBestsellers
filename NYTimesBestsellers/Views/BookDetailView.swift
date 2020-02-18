@@ -28,6 +28,7 @@ class BookDetailView: UIView {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "Books_(iOS).png"), for: .normal)
         button.tag = 1
+        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return button
     }()
     
