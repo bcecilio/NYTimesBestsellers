@@ -44,7 +44,6 @@ class BookDetailController: UIViewController {
         detailView.delegate = self
         detailView.configureView(book)
         setupBarButton()
-        print(book.primaryIsbn13)
     }
     
     @objc private func buttonPressed(_ sender: UIBarButtonItem) {

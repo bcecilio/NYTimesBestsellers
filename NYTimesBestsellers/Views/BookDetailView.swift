@@ -50,7 +50,7 @@ class BookDetailView: UIView {
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.isUserInteractionEnabled = false
+        textView.isEditable = false
         textView.layer.cornerRadius = 3
         textView.clipsToBounds = true
         textView.font = UIFont.systemFont(ofSize: 14)
