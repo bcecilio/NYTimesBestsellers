@@ -52,6 +52,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        getDefaultBooks()
     }
     
     private func getDefaultBooks() {
