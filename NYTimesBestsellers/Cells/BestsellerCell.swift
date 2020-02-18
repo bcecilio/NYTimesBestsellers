@@ -21,14 +21,15 @@ class BestsellerCell: UICollectionViewCell {
        let label = UILabel()
         label.text = "Length book was on Best Sellers List"
         label.textAlignment = .center
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
         return label
     }()
     
     public var bookDescriptionLabel: UILabel = {
        let label = UILabel()
         label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        label.font = UIFont(name: "HelveticaNeue-Light", size: 15)
+        label.font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
@@ -53,10 +54,10 @@ class BestsellerCell: UICollectionViewCell {
         addSubview(bookImageView)
         bookImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            bookImageView.topAnchor.constraint(equalTo: topAnchor),
+            bookImageView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             bookImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             bookImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bookImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 4)
+            bookImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 3.5)
         ])
     }
     
@@ -64,7 +65,7 @@ class BestsellerCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: bookImageView.bottomAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: bookImageView.bottomAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.height)
@@ -76,8 +77,8 @@ class BestsellerCell: UICollectionViewCell {
         bookDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             bookDescriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3),
-            bookDescriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            bookDescriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            bookDescriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            bookDescriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             bookDescriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
@@ -92,6 +93,7 @@ class BestsellerCell: UICollectionViewCell {
             case .success(let image):
                 DispatchQueue.main.async {
                     self?.bookImageView.image = image
+                    self?.bookImageView.layer.cornerRadius = 7
                 }
             }
         }

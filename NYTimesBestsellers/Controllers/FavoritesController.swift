@@ -14,19 +14,19 @@ class FavoritesController: UIViewController {
     
     private let dataPersistence: DataPersistence<Book>
     
-    init(_ dataPersistence: DataPersistence<Book>) {
+    public init(_ dataPersistence: DataPersistence<Book>) {
         self.dataPersistence = dataPersistence
         super.init(nibName: nil, bundle: nil)
         self.dataPersistence.delegate = self
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var favoritesView = FavoritesView()
+    private var favoritesView = FavoritesView()
     
-    var books = [Book]() {
+    private var books = [Book]() {
         didSet {
             self.favoritesView.collectionView.reloadData()
             if books.isEmpty {
@@ -34,7 +34,7 @@ class FavoritesController: UIViewController {
             } else {
                 favoritesView.collectionView.backgroundView = nil
             }
-
+            
         }
     }
     
@@ -55,7 +55,7 @@ class FavoritesController: UIViewController {
     
     
     
-    func loadBooks() {
+    private func loadBooks() {
         do {
             books = try dataPersistence.loadItems()
         } catch {
@@ -63,7 +63,7 @@ class FavoritesController: UIViewController {
             present(alertvc, animated: true, completion: nil)
         }
     }
-  
+    
     
     func collectionViewExtensions() {
         favoritesView.collectionView.dataSource = self
@@ -118,11 +118,12 @@ extension FavoritesController: FavoritesCellDelegate {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { alertAction in
             self.deleteBook(book)
-               }
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let amazonAction = UIAlertAction(title: "View on Amazon", style: .default) { alertAction in
-            let amazonLink = self.books.first?.amazonProductURL
-            guard let url = URL(string: amazonLink ?? "") else { return }
+            let amazonLink = book.amazonProductURL
+            //            let amazonLink = self.books.first?.amazonProductURL
+            guard let url = URL(string: amazonLink) else { return }
             UIApplication.shared.open(url)
         }
         

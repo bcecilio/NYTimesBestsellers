@@ -53,6 +53,7 @@ class BookDetailView: UIView {
         textView.isUserInteractionEnabled = false
         textView.layer.cornerRadius = 3
         textView.clipsToBounds = true
+        textView.font = UIFont.systemFont(ofSize: 14)
         return textView
     }()
     
@@ -96,6 +97,10 @@ class BookDetailView: UIView {
             }
         }
         
+    }
+    
+    public func configureText(_ str: String) {
+        textView.text = str
     }
     
     private func configureAmazonButton() {

@@ -101,4 +101,22 @@ class NYTimesBestsellersTests: XCTestCase {
         
         wait(for: [exp], timeout: 2)
     }
+    
+    func testGoogleBooks() {
+        let endpoint = "https://www.googleapis.com/books/v1/volumes?q=isbn:9781250209764"
+        var bookstuff = [GoogleBook]()
+        let exp = XCTestExpectation(description: "Created test for something")
+        GenericCoderAPI.manager.getJSON(objectType: GoogleBookWrapper.self, with: endpoint) { result in
+            switch result {
+            case .failure(let error):
+                XCTFail("Error occurred: \(error)")
+            case .success(let wrapper):
+                bookstuff = wrapper.items
+                XCTAssert(!bookstuff.isEmpty)
+                exp.fulfill()
+            }
+        }
+        
+        wait(for: [exp], timeout: 2)
+    }
 }
