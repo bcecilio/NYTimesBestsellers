@@ -4,7 +4,7 @@ New York Times Bestseller books.
 
 ## Description: 
 
-The app allows you to search for your favorite books and save them to a favorite's tab. The app also allows you to search the best sellers list from the New York Times.
+The New York Times best sellers app allows user's to look, favorite, and shop for their favorite collection of over
 
 
 ## Screenshot
