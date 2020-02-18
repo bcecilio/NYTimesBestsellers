@@ -23,7 +23,7 @@ The New York Times best sellers app allows user's to look, favorite, and shop fo
 
 ##  GIF
 
-## Colaborators: 
+## Collaborators: 
 https://github.com/bcecilio
 
 https://github.com/oscarvictoria
