@@ -35,7 +35,11 @@ class BookDetailView: UIView {
     private lazy var imageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "photo")
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
+        iv.layer.cornerRadius = 5
+        iv.clipsToBounds = true
+        iv.layer.borderWidth = 2
+        iv.layer.borderColor = UIColor.black.cgColor
         return iv
     }()
     
@@ -46,6 +50,9 @@ class BookDetailView: UIView {
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
+        textView.isUserInteractionEnabled = false
+        textView.layer.cornerRadius = 3
+        textView.clipsToBounds = true
         textView.font = UIFont.systemFont(ofSize: 14)
         return textView
     }()
@@ -133,7 +140,7 @@ class BookDetailView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
@@ -143,9 +150,9 @@ class BookDetailView: UIView {
         textView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            textView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            textView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            textView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            textView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ])
     }
     
