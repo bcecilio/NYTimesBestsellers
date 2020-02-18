@@ -92,8 +92,8 @@ class BookDetailView: UIView {
         
     }
     
-    public func configureText(_ book: GoogleBook) {
-        textView.text = book.volumeInfo.description
+    public func configureText(_ str: String) {
+        textView.text = str
     }
     
     private func configureAmazonButton() {

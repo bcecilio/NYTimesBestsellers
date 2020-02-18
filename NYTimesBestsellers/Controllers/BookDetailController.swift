@@ -44,6 +44,7 @@ class BookDetailController: UIViewController {
         detailView.delegate = self
         detailView.configureView(book)
         setupBarButton()
+        print(book.primaryIsbn13)
     }
     
     @objc private func buttonPressed(_ sender: UIBarButtonItem) {
@@ -68,11 +69,11 @@ class BookDetailController: UIViewController {
         let endpoint = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(book.primaryIsbn10)"
         GenericCoderAPI.manager.getJSON(objectType: GoogleBookWrapper.self, with: endpoint) { result in
             switch result {
-            case .failure(let _):
+            case .failure:
                 break
             case .success(let wrapper):
                 DispatchQueue.main.async {
-                    self.detailView.configureText(wrapper.items[0])
+                    self.detailView.configureText(wrapper.items[0].volumeInfo.description)
                 }
             }
         }
@@ -92,7 +93,7 @@ extension BookDetailController: BookDetailViewDelegate {
                 present(UIAlertController.errorAlert("Could not bring up URL"), animated: true, completion: nil)
                 break
             }
-
+            
             let safariVC = SFSafariViewController(url: url)
             present(safariVC, animated: true)
         case 1:
