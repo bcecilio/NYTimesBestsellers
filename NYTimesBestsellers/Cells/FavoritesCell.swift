@@ -23,18 +23,19 @@ class FavoritesCell: UICollectionViewCell {
         let textView = UITextView()
         textView.text = "Text View text goes here"
         textView.isUserInteractionEnabled = false
+        textView.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         return textView
     }()
     
     public lazy var weeksLabel: UILabel = {
         let label = UILabel()
-        label.text = "Number of weeks in Best Sellers list"
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
         return label
     }()
     
     public lazy var moreButton: UIButton = {
        let button = UIButton()
-       button.setBackgroundImage(UIImage(systemName: "ellipsis.circle"), for: .normal)
+       button.setBackgroundImage(UIImage(named: "icons8-ellipsis"), for: .normal)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
        return button
     }()
@@ -75,7 +76,7 @@ class FavoritesCell: UICollectionViewCell {
             imageView.topAnchor.constraint(equalTo: moreButton.bottomAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
+            imageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height / 5)
         ])
     }
     
