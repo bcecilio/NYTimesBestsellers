@@ -10,7 +10,7 @@ import UIKit
 import ImageKit
 
 protocol BookDetailViewDelegate: AnyObject {
-    func didPressButton()
+    func didPressButton(_ button: UIButton)
 }
 
 class BookDetailView: UIView {
@@ -18,6 +18,16 @@ class BookDetailView: UIView {
     private lazy var amazonButton: UIButton = {
         //TODO: Create photo.
         let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "Amazon_icon.png"), for: .normal)
+        button.tag = 0
+        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var appleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "Books_(iOS).png"), for: .normal)
+        button.tag = 1
         button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         return button
     }()
@@ -51,7 +61,8 @@ class BookDetailView: UIView {
     
     private func commonInit() {
         backgroundColor = .secondarySystemBackground
-        configureButton()
+        configureAmazonButton()
+        configureAppleButton()
         configureImageView()
         configureTitleLabel()
         configureTextView()
@@ -61,7 +72,7 @@ class BookDetailView: UIView {
     
     @objc private func buttonPressed(_ sender: UIButton) {
         /// Add this action to a button that saves the book in detail.
-        delegate?.didPressButton()
+        delegate?.didPressButton(sender)
     }
     
     public func configureView(_ book: Book) {
@@ -80,7 +91,7 @@ class BookDetailView: UIView {
         
     }
     
-    private func configureButton() {
+    private func configureAmazonButton() {
         addSubview(amazonButton)
         amazonButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -89,6 +100,16 @@ class BookDetailView: UIView {
             amazonButton.heightAnchor.constraint(equalToConstant: 120),
             amazonButton.widthAnchor.constraint(equalTo: amazonButton.heightAnchor)
         ])
+    }
+    
+    private func configureAppleButton() {
+        addSubview(appleButton)
+        appleButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            appleButton.topAnchor.constraint(equalTo: amazonButton.bottomAnchor, constant: 8),
+            appleButton.centerXAnchor.constraint(equalTo: amazonButton.centerXAnchor, constant: 6.5),
+            appleButton.heightAnchor.constraint(equalTo: amazonButton.heightAnchor),
+            appleButton.widthAnchor.constraint(equalTo: amazonButton.widthAnchor)])
     }
     
     private func configureImageView() {

@@ -9,6 +9,7 @@
 import UIKit
 import DataPersistence
 import ImageKit
+import SafariServices
 
 class BookDetailController: UIViewController {
     
@@ -39,6 +40,7 @@ class BookDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailView.delegate = self
         detailView.configureView(book)
         setupBarButton()
     }
@@ -65,4 +67,28 @@ class BookDetailController: UIViewController {
         navigationItem.setRightBarButton(button, animated: true)
     }
     
+}
+
+extension BookDetailController: BookDetailViewDelegate {
+    func didPressButton(_ button: UIButton) {
+        switch button.tag {
+        case 0:
+            guard let url = URL(string: book.amazonProductURL) else {
+                present(UIAlertController.errorAlert("Could not bring up URL"), animated: true, completion: nil)
+                break
+            }
+
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true)
+        case 1:
+            guard let url = URL(string: book.buyLinks[1].url) else {
+                present(UIAlertController.errorAlert("Could not bring up URL"), animated: true, completion: nil)
+                break
+            }
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true)
+        default:
+            break
+        }
+    }
 }
